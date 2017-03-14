@@ -135,7 +135,7 @@ export default class MessagingApp extends React.Component{
 
   render(){
     return (
-      
+
          <div className="container">
           <nav role="links">
             <h2> Channels </h2>
@@ -170,6 +170,7 @@ export default class MessagingApp extends React.Component{
               bodyValue={this.state.bodyValue}
               channelValue={this.state.channelValue}
               onChange={this.props.onChange}
+              user={this.state.user}
             />
           </div>
  </div>
