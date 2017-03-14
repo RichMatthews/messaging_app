@@ -14,7 +14,7 @@ export default class MessageDetail extends React.Component {
       <div className="messageDetail">
         <div className="messageForm" >
             <input id="senderMsgBody" value={this.props.bodyValue} onChange={this.props.handleBodyChange} placeholder="Body"/>
-            <button id="postButton" className="postButton" onClick={this.wait} >Post</button>
+            <button id="postButton" disabled={!this.props.user} className="postButton" onClick={this.wait} >Post</button>
         </div>
       </div>
     );
