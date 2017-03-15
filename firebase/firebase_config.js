@@ -8,3 +8,4 @@ const firebase = require('firebase');
   };
   export const firebase_init = firebase.initializeApp(config);
   export const rootRef = firebase.database().ref();
+  export const messaging = firebase.messaging();
