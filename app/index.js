@@ -1,9 +1,10 @@
-const express = require('express'), app = express();
+var express = require('express');
+var app = express();
 
-app.use(express.static(__dirname + '/public'));
+app.use('/', express.static('public'));
 
-app.use('/', (req,res){
-  res.sendFile(__dirname + '/index.html');
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.listen(process.env.PORT || 8080);
