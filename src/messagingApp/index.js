@@ -132,13 +132,11 @@ export default class MessagingApp extends React.Component{
 
   login = () => {
     let userDisplayName;
-    console.log('1');
     firebase.auth().signInWithRedirect(provider).then(function(result) {
-      console.log('2');
       var token = result.credential.accessToken;
       var user = result.user;
-      debugger;
     }).catch(function(error) {
+      debugger;
       console.log('3');
       var errorCode = error.code;
       var errorMessage = error.message;
