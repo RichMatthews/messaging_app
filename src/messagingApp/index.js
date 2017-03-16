@@ -23,15 +23,7 @@ export default class MessagingApp extends React.Component{
       activeChannel: false,
       channelValue: 'General',
       user: '',
-      all_channels: [
-        {name: 'General'},
-        {name: 'Random'},
-        {name: 'Tech'},
-        {name: 'Devs'},
-        {name: 'QA'},
-        {name: 'UX'},
-        {name: 'JavaScript'}
-      ]
+      all_channels: []
     };
 
     this.getMessagesAndSetState = this.getMessagesAndSetState.bind(this);
@@ -39,13 +31,28 @@ export default class MessagingApp extends React.Component{
   }
 
   getMessagesAndSetState = () => {
-    this.pullMessagesFromDb('/messages/' + this.state.channelValue + '/').then((messages) => {
+    this.pullMessagesFromDb('/options' + '/messages/' + this.state.channelValue + '/').then((messages) => {
       let all_messages = Object.keys(messages.val()).map(function(key) {
        return messages.val()[key];
      });
      this.setState({all_messages: all_messages});
     });
   };
+
+  getChannels = () => {
+    this.pullMessagesFromDb('/options' + '/channels/').then((channels) => {
+      let all_channels = Object.keys(channels.val()).map(function(key) {
+       return channels.val()[key];
+     });
+     this.setState({all_channels: all_channels});
+    });
+  };
+
+  pullMessagesFromDb = (query) => {
+    return new Promise((resolve, reject) => {
+      firebase.database().ref(query).on('value', resolve);
+    });
+  }
 
   componentDidMount = () => {
     this.requestPermission();
@@ -79,12 +86,6 @@ export default class MessagingApp extends React.Component{
     });
   }
 
-  pullMessagesFromDb = (query) => {
-    return new Promise((resolve, reject) => {
-      firebase.database().ref(query).on('value', resolve);
-    });
-  }
-
   handleNameChange = (event) => {
     this.setState({nameValue: 'a'})
   }
@@ -98,7 +99,7 @@ export default class MessagingApp extends React.Component{
   }
 
   postMessageToDb = (channelName) => {
-    let database = rootRef.child('messages/' + channelName);
+    let database = rootRef.child('options/' + 'messages/' + channelName);
     let chat  = { name: this.state.user.displayName, body: this.state.bodyValue };
     database.push().set(chat).then(() => {
       this.getMessagesAndSetState();
