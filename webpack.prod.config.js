@@ -10,7 +10,8 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'index.js'
+    filename: 'index.js',
+    publicPath: '/public/'
   },
 
   module: {

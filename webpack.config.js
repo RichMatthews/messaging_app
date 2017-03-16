@@ -8,12 +8,7 @@ module.exports = {
    path: path.resolve(__dirname, 'public'),
    filename: 'index.js'
  },
-
- devServer: {
-   inline: true,
-   port: 3333
- },
-
+ 
  module: {
    loaders: [
      {
