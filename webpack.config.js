@@ -5,7 +5,7 @@ module.exports = {
  entry: './main.js',
 
  output: {
-   path: path.resolve(__dirname, 'app'),
+   path: path.resolve(__dirname, 'public'),
    filename: 'index2.js'
  },
 
