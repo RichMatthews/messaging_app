@@ -131,6 +131,7 @@ export default class MessagingApp extends React.Component{
 
 
   login = () => {
+    debugger;
     let userDisplayName;
     firebase.auth().signInWithRedirect(provider).then(function(result) {
       var token = result.credential.accessToken;

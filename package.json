@@ -59,7 +59,6 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^2.8.1",
-    "socket.io": "^1.7.3",
     "webpack": "^1.12.2",
     "webpack-config": "^6.1.2"
   }
