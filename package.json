@@ -5,6 +5,7 @@
   "main": "./app/index.js",
   "scripts": {
     "prestart": "webpack",
+    "build": "webpack",
     "test": "mocha --require ignore-styles setup.js --compilers js:babel-core/register 'src/**/*.spec.js'",
     "watch": "webpack --watch",
     "start": "node ./app/index.js"
