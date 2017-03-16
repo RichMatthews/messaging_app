@@ -6,8 +6,7 @@
   "scripts": {
     "test": "mocha --require ignore-styles setup.js --compilers js:babel-core/register 'src/**/*.spec.js'",
     "watch": "webpack --watch",
-    "start": "node ./app/index.js",
-    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
+    "start": "node ./app/index.js"
   },
   "engines": {
     "node": "7.5.0",
