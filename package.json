@@ -4,7 +4,7 @@
   "description": "",
   "main": "./app/index.js",
   "scripts": {
-    "prestart": "webpack",
+    "postinstall": "webpack",
     "build": "webpack",
     "test": "mocha --require ignore-styles setup.js --compilers js:babel-core/register 'src/**/*.spec.js'",
     "watch": "webpack --watch",
