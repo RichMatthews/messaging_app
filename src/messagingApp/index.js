@@ -55,6 +55,7 @@ export default class MessagingApp extends React.Component{
   }
 
   componentDidMount = () => {
+    this.getChannels();
     this.requestPermission();
     this.getMessagesAndSetState();
     firebase.auth().getRedirectResult().then(function(result) {
@@ -124,12 +125,18 @@ export default class MessagingApp extends React.Component{
   };
 
   createChannel = () => {
-    // probably needs to be done with firebase
     let channelName = prompt("Enter channel name");
-    this.setState({all_channels: this.state.all_channels.concat([channelName])})
-  }
-
-
+    var postData = {
+      name: channelName,
+      members: '100',
+      purpose: 'purpose'
+    };
+    var newPostKey = firebase.database().ref().child('options').push().key;
+    var updates = {};
+    updates['/options/' + 'channels/' + channelName + newPostKey] = postData;
+    firebase.database().ref().update(updates);
+    this.getChannels();
+  };
 
   login = () => {
     let userDisplayName;
@@ -138,7 +145,6 @@ export default class MessagingApp extends React.Component{
       var user = result.user;
     }).catch(function(error) {
       debugger;
-      console.log('3');
       var errorCode = error.code;
       var errorMessage = error.message;
       var email = error.email;
