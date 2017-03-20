@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
 import { rootRef, firebase_init, storage, messaging } from '../../firebase/firebase_config.js';
 
 import './index.scss';
@@ -22,7 +23,9 @@ export default class MessagingApp extends React.Component{
       bodyValue: '',
       activeChannel: false,
       channelValue: 'General',
+      channelNameValue: '',
       user: '',
+      isModalOpen: false,
       all_channels: []
     };
 
@@ -124,8 +127,20 @@ export default class MessagingApp extends React.Component{
     this.getMessagesAndSetState();
   };
 
+  openModal = () => {
+    this.setState({isModalOpen: true})
+  };
+
+  closeModal = () => {
+    this.setState({isModalOpen: false})
+  };
+
+  handleChannelNameChange = (event) => {
+    this.setState({channelNameValue: event.target.value})
+  }
+
   createChannel = () => {
-    let channelName = prompt("Enter channel name");
+    let channelName = this.state.channelNameValue;
     var postData = {
       name: channelName,
       members: '100',
@@ -136,7 +151,8 @@ export default class MessagingApp extends React.Component{
     updates['/options/' + 'channels/' + channelName + newPostKey] = postData;
     firebase.database().ref().update(updates);
     this.getChannels();
-  };
+    this.setState({isModalOpen: false})
+  }
 
   login = () => {
     let userDisplayName;
@@ -160,7 +176,13 @@ export default class MessagingApp extends React.Component{
           <nav role="links">
             <h2> Channels </h2>
             <button onClick={this.login}>Log in with Google</button>
-            <button onClick={this.createChannel}>Add channel</button>
+            <button onClick={this.openModal}>Add channel</button>
+            <Modal className="modal" isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
+              <h1>Create a Channel</h1>
+              <input id="channelNameValue" value={this.channelNameValue} onChange={this.handleChannelNameChange} placeholder="channel name"/>
+              <p><button onClick={() => this.createChannel()}>Create Channel</button></p>
+              <p><button onClick={() => this.closeModal()}>Cancel</button></p>
+            </Modal>
             {this.state.all_channels.map(function(chnl, index){
                 return <div key={ index }><Button channelClick={this.channelClick.bind(this)} text={chnl.name} /></div>
             }, this)}
