@@ -173,47 +173,51 @@ export default class MessagingApp extends React.Component{
   render(){
     return (
          <div className="container">
-          <nav role="links">
-            <h2> Channels </h2>
-            <button onClick={this.login}>Log in with Google</button>
-            <button onClick={this.openModal}>Add channel</button>
-            <Modal className="modal" isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
-              <h1>Create a Channel</h1>
-              <input id="channelNameValue" value={this.channelNameValue} onChange={this.handleChannelNameChange} placeholder="channel name"/>
-              <p><button onClick={() => this.createChannel()}>Create Channel</button></p>
-              <p><button onClick={() => this.closeModal()}>Cancel</button></p>
-            </Modal>
-            {this.state.all_channels.map(function(chnl, index){
-                return <div key={ index }><Button channelClick={this.channelClick.bind(this)} text={chnl.name} /></div>
-            }, this)}
-          </nav>
-          <div className="headingOne">
-            {this.state.activeChannel
-              ?
-              <Channel
-               channelValue={this.state.channelValue}
-              />
-              :
-              <h1> {this.state.channelValue} </h1>
-            }
-          </div>
-          <div className="postedMessagesContainer">
-              <div id="messages">
-                {this.state.all_messages.map(function(msg, index){
-                    return <div id="msgs" key={ index }><p id="msgName">{msg.name}</p><p id="msgBody">{msg.body}<span><button onClick={() => this.deleteMessage(index)}>Delete</button></span></p></div>
+           <div className="navbar">
+              <nav role="links">
+                <h2> Channels </h2>
+                <button onClick={this.login}>Log in with Google</button>
+                <button onClick={this.openModal}>Add channel</button>
+                {this.state.all_channels.map(function(chnl, index){
+                    return <div key={ index }><Button channelClick={this.channelClick.bind(this)} text={chnl.name} /></div>
                 }, this)}
+              </nav>
+            </div>
+            <div className="other">
+              <Modal className="modal" isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
+                <h1>Create a Channel</h1>
+                <input id="channelNameValue" value={this.channelNameValue} onChange={this.handleChannelNameChange} placeholder="channel name"/>
+                <p><button onClick={() => this.createChannel()}>Create Channel</button></p>
+                <p><button onClick={() => this.closeModal()}>Cancel</button></p>
+              </Modal>
+              <div className="headingOne">
+                {this.state.activeChannel
+                  ?
+                  <Channel
+                   channelValue={this.state.channelValue}
+                  />
+                  :
+                  <h1> {this.state.channelValue} </h1>
+                }
               </div>
-          </div>
-          <div className="messageDetails">
-            <MessageDetail
-              handleNameChange={this.handleNameChange.bind(this)}
-              handleBodyChange={this.handleBodyChange.bind(this)}
-              postMessageToDb={this.postMessageToDb.bind(this)}
-              bodyValue={this.state.bodyValue}
-              channelValue={this.state.channelValue}
-              onChange={this.props.onChange}
-              user={this.state.user}
-            />
+              <div className="postedMessagesContainer">
+                  <div id="messages">
+                    {this.state.all_messages.map(function(msg, index){
+                        return <div id="msgs" key={ index }><p id="msgName">{msg.name}</p><p id="msgBody">{msg.body}<span><button onClick={() => this.deleteMessage(index)}>Delete</button></span></p></div>
+                    }, this)}
+                  </div>
+              </div>
+              <div className="messageDetails">
+                <MessageDetail
+                  handleNameChange={this.handleNameChange.bind(this)}
+                  handleBodyChange={this.handleBodyChange.bind(this)}
+                  postMessageToDb={this.postMessageToDb.bind(this)}
+                  bodyValue={this.state.bodyValue}
+                  channelValue={this.state.channelValue}
+                  onChange={this.props.onChange}
+                  user={this.state.user}
+                />
+              </div>
           </div>
         </div>
       )
