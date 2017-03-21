@@ -19,14 +19,14 @@ export default class MessagingApp extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
+      activeChannel: false,
+      all_channels: [],
       all_messages: [],
       bodyValue: '',
-      activeChannel: false,
       channelValue: 'General',
       channelNameValue: '',
-      user: '',
       isModalOpen: false,
-      all_channels: []
+      user: ''
     };
 
     this.getMessagesAndSetState = this.getMessagesAndSetState.bind(this);
@@ -104,7 +104,7 @@ export default class MessagingApp extends React.Component{
 
   postMessageToDb = (channelName) => {
     let database = rootRef.child('options/' + 'messages/' + channelName);
-    let chat  = { name: this.state.user.displayName, body: this.state.bodyValue };
+    let chat  = { name: this.state.user.displayName, body: this.state.bodyValue, image: this.state.user.photoURL };
     database.push().set(chat).then(() => {
       this.getMessagesAndSetState();
     });
@@ -175,9 +175,8 @@ export default class MessagingApp extends React.Component{
          <div className="container">
            <div className="navbar">
               <nav role="links">
-                <h2> Channels </h2>
                 <button onClick={this.login}>Log in with Google</button>
-                <button onClick={this.openModal}>Add channel</button>
+                <h2> Channels <button className="createChannelBtn" onClick={this.openModal}>+</button></h2>
                 {this.state.all_channels.map(function(chnl, index){
                     return <div key={ index }><Button channelClick={this.channelClick.bind(this)} text={chnl.name} /></div>
                 }, this)}
@@ -203,7 +202,7 @@ export default class MessagingApp extends React.Component{
               <div className="postedMessagesContainer">
                   <div id="messages">
                     {this.state.all_messages.map(function(msg, index){
-                        return <div id="msgs" key={ index }><p id="msgName">{msg.name}</p><p id="msgBody">{msg.body}<span><button onClick={() => this.deleteMessage(index)}>Delete</button></span></p></div>
+                        return <div id="msgs" key={ index }><p id="msgPhoto"><img src={msg.image} height="42" width="42"/><span id="msgName">{msg.name}</span></p><p id="msgBody">{msg.body}<span><button onClick={() => this.deleteMessage(index)}>Delete</button></span></p></div>
                     }, this)}
                   </div>
               </div>

@@ -5,7 +5,16 @@ html, body {
 }
 
 .modal {
-  background-color: red;
+  background-color: #f2f2f2;
+  width: 400px;
+  margin-left: 50%;
+}
+
+.createChannelBtn {
+  font-size: 20px;
+  border-radius: 35px;
+  outline: none;
+  padding: none;
 }
 
 .container {
@@ -15,16 +24,34 @@ html, body {
   flex-direction: row;
 }
 
+.navbar {
+  border: 1px #f2f2f2 solid;
+  background-color: #f2f2f2;
+  width: 200px;
+  height: 100vh;
+}
+
+.other {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+
 .headingOne {
   font-size: 20px;
+  height: 10%;
 }
 
 .postedMessagesContainer {
-  position: relative;
-  text-align: left;
-  border: 5px solid black;
-  height: 100%;
+  border: 2px solid black;
   padding: 10px;
+  height: 80%;
+}
+
+.messageDetails {
+  margin-top: auto;
+  height: 10%;
 }
 
 #msgName {
@@ -33,15 +60,4 @@ html, body {
 
 p {
   margin: auto;
-}
-
-.navbar {
-  border: 1px #e5e3e3 solid;
-  background-color: #e5e3e3;
-  width: 200px;
-  height: 100%;
-}
-
-#footer {
-  margin-top: 150px;
 }
