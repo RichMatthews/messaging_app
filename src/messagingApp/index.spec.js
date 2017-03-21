@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
 import chaiEnzyme from 'chai-enzyme';
-import ReactTestUtils from 'react-addons-test-utils';
 const chai = require('chai');
 chai.use(chaiEnzyme());
 import Main from './index';
