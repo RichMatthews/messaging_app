@@ -25,7 +25,8 @@ export default class MessagingApp extends React.Component{
       bodyValue: '',
       channelValue: 'General',
       channelNameValue: '',
-      isModalOpen: false,
+      isChannelModalOpen: false,
+      isDirectMsgModalOpen: false,
       user: ''
     };
 
@@ -128,12 +129,20 @@ export default class MessagingApp extends React.Component{
     this.getMessagesAndSetState();
   };
 
-  openModal = () => {
-    this.setState({isModalOpen: true})
+  openChannelModal = () => {
+    this.setState({isChannelModalOpen: true})
   };
 
-  closeModal = () => {
-    this.setState({isModalOpen: false})
+  openDirectMsgModal = () => {
+    this.setState({isDirectMsgModalOpen: true})
+  };
+
+  closeChannelModal = () => {
+    this.setState({isChannelModalOpen: false})
+  };
+
+  closeDirectMsgModal = () => {
+    this.setState({isDirectMsgModalOpen: false})
   };
 
   handleChannelNameChange = (event) => {
@@ -152,7 +161,7 @@ export default class MessagingApp extends React.Component{
     updates['/options/' + 'channels/' + channelName + newPostKey] = postData;
     firebase.database().ref().update(updates);
     this.getChannels();
-    this.setState({isModalOpen: false})
+    this.setState({isChannelModalOpen: false})
   }
 
   login = () => {
@@ -186,18 +195,19 @@ export default class MessagingApp extends React.Component{
            <div className="navbar">
               <nav role="links">
                 <button onClick={this.login}>Log in with Google</button>
-                <h2> Channels <button className="createChannelBtn" onClick={this.openModal}>+</button></h2>
+                <h2> Channels <button className="createChannelBtn" onClick={this.openChannelModal}>+</button></h2>
                 {this.state.all_channels.map(function(chnl, index){
                     return <div id="channelBtn" key={ index }><Button channelClick={this.channelClick.bind(this)} text={chnl.name} /></div>
                 }, this)}
               </nav>
+              <h2> Direct Messages <button className="directMsgBtn" onClick={this.openDirectMsgModal}>+</button></h2>
             </div>
             <div className="other">
-              <Modal className="modal" isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
+              <Modal className="modal" isOpen={this.state.isChannelModalOpen} onClose={() => this.closeChannelModal()}>
                 <h1>Create a Channel</h1>
                 <input id="channelNameValue" value={this.channelNameValue} onChange={this.handleChannelNameChange} placeholder="channel name"/>
                 <p><button onClick={() => this.createChannel()}>Create Channel</button></p>
-                <p><button onClick={() => this.closeModal()}>Cancel</button></p>
+                <p><button onClick={() => this.closeChannelModal()}>Cancel</button></p>
               </Modal>
               <div className="headingOne">
                 {this.state.activeChannel
