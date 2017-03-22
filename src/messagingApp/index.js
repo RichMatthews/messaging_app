@@ -178,7 +178,7 @@ export default class MessagingApp extends React.Component{
                 <button onClick={this.login}>Log in with Google</button>
                 <h2> Channels <button className="createChannelBtn" onClick={this.openModal}>+</button></h2>
                 {this.state.all_channels.map(function(chnl, index){
-                    return <div key={ index }><Button channelClick={this.channelClick.bind(this)} text={chnl.name} /></div>
+                    return <div id="channelBtn" key={ index }><Button channelClick={this.channelClick.bind(this)} text={chnl.name} /></div>
                 }, this)}
               </nav>
             </div>
