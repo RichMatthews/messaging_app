@@ -58,6 +58,7 @@ export default class MessagingApp extends React.Component{
   }
 
   componentDidMount = () => {
+    this.scrollToBottom();
     this.getChannels();
     this.requestPermission();
     this.getMessagesAndSetState();
@@ -169,6 +170,15 @@ export default class MessagingApp extends React.Component{
 
   };
 
+  scrollToBottom = () => {
+    const node = ReactDOM.findDOMNode(this.messagesEnd);
+    node.scrollIntoView({behavior: "smooth"});
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
 
   render(){
     return (
@@ -204,6 +214,8 @@ export default class MessagingApp extends React.Component{
                     {this.state.all_messages.map(function(msg, index){
                         return <div id="msgs" key={ index }><p id="msgPhoto"><img src={msg.image} height="42" width="42"/><span id="msgName">{msg.name}</span></p><p id="msgBody">{msg.body}<span><button onClick={() => this.deleteMessage(index)}>Delete</button></span></p></div>
                     }, this)}
+                    <div id="bottom" ref={(el) => { this.messagesEnd = el; }}>
+                    </div>
                   </div>
               </div>
               <div className="messageDetails">
