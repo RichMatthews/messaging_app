@@ -37,6 +37,10 @@ html, body {
   height: 100vh;
 }
 
+.headingOne {
+  border-bottom: 1px #dadfe8 solid;
+}
+
 .other {
   display: flex;
   flex-direction: column;
@@ -50,7 +54,6 @@ html, body {
 }
 
 .postedMessagesContainer {
-  border: 2px solid black;
   padding: 10px;
   height: 80%;
   overflow: scroll;
