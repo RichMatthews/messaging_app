@@ -62,7 +62,7 @@ export default class MessagingApp extends React.Component{
     this.scrollToBottom();
     this.getChannels();
     this.requestPermission();
-    this.getMessagesAndSetState();
+    getMessagesAndSetState();
     firebase.auth().getRedirectResult().then(function(result) {
         if (result.credential) {
           var token = result.credential.accessToken;
@@ -186,6 +186,7 @@ export default class MessagingApp extends React.Component{
 
   componentDidUpdate() {
     this.scrollToBottom();
+    setInterval(this.getMessagesAndSetState, 3000);
   }
 
 
