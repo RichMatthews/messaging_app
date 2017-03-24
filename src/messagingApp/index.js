@@ -35,6 +35,7 @@ export default class MessagingApp extends React.Component{
   }
 
   getMessagesAndSetState = () => {
+    this.forceUpdate();
     this.pullMessagesFromDb('/options' + '/messages/' + this.state.channelValue + '/').then((messages) => {
       let all_messages = Object.keys(messages.val()).map(function(key) {
        return messages.val()[key];
