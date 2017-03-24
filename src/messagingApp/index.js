@@ -170,7 +170,6 @@ export default class MessagingApp extends React.Component{
       var token = result.credential.accessToken;
       var user = result.user;
     }).catch(function(error) {
-      debugger;
       var errorCode = error.code;
       var errorMessage = error.message;
       var email = error.email;
@@ -187,6 +186,7 @@ export default class MessagingApp extends React.Component{
   componentDidUpdate() {
     this.scrollToBottom();
     //setInterval(this.getMessagesAndSetState, 3000);
+    this.pullMessagesFromDb();
   }
 
 
