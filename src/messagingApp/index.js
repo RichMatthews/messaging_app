@@ -109,9 +109,9 @@ export default class MessagingApp extends React.Component{
     let chat  = { name: this.state.user.displayName, body: this.state.bodyValue, image: this.state.user.photoURL };
     database.push().set(chat).then(() => {
       this.getMessagesAndSetState();
+      this.forceUpdate();
     });
     this.resetForm();
-    this.forceUpdate();
   };
 
   clearMessages = () =>{
