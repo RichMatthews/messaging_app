@@ -41,7 +41,6 @@ export default class MessagingApp extends React.Component{
      });
      this.setState({all_messages: all_messages});
     });
-    this.forceUpdate();
   };
 
   getChannels = () => {
@@ -112,6 +111,7 @@ export default class MessagingApp extends React.Component{
       this.getMessagesAndSetState();
     });
     this.resetForm();
+    this.forceUpdate();
   };
 
   clearMessages = () =>{
