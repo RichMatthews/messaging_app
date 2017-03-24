@@ -10,10 +10,21 @@ html, body {
   background-color: green;
 }
 
+.modals {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.channelModal {
+    width: auto;
+    border: 1px solid blue;
+}
+
 .modal {
   background-color: #f2f2f2;
   width: 400px;
-  margin-left: 50%;
 }
 
 .createChannelBtn {

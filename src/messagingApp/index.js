@@ -192,6 +192,24 @@ export default class MessagingApp extends React.Component{
   render(){
     return (
          <div className="container">
+           <div className="modals">
+             <div className="channelModal" >
+                 <Modal className="modal" isOpen={this.state.isChannelModalOpen} onClose={() => this.closeChannelModal()}>
+                   <h1>Create a Channel</h1>
+                   <input id="channelNameValue" value={this.channelNameValue} onChange={this.handleChannelNameChange} placeholder="channel name"/>
+                   <p><button onClick={() => this.createChannel()}>Create Channel</button></p>
+                   <p><button onClick={() => this.closeChannelModal()}>Cancel</button></p>
+                 </Modal>
+             </div>
+             <div className="directMsgModal" >
+                 <Modal className="modal" isOpen={this.state.isChannelModalOpen} onClose={() => this.closeChannelModal()}>
+                   <h1>Send a Message</h1>
+                   <input id="channelNameValue" value={this.channelNameValue} onChange={this.handleChannelNameChange} placeholder="channel name"/>
+                   <p><button onClick={() => this.createChannel()}>Create Channel</button></p>
+                   <p><button onClick={() => this.closeChannelModal()}>Cancel</button></p>
+                 </Modal>
+             </div>
+           </div>
            <div className="navbar">
               <nav role="links">
                 <button onClick={this.login}>Log in with Google</button>
@@ -203,12 +221,6 @@ export default class MessagingApp extends React.Component{
               <h2> Direct Messages <button className="directMsgBtn" onClick={this.openDirectMsgModal}>+</button></h2>
             </div>
             <div className="other">
-              <Modal className="modal" isOpen={this.state.isChannelModalOpen} onClose={() => this.closeChannelModal()}>
-                <h1>Create a Channel</h1>
-                <input id="channelNameValue" value={this.channelNameValue} onChange={this.handleChannelNameChange} placeholder="channel name"/>
-                <p><button onClick={() => this.createChannel()}>Create Channel</button></p>
-                <p><button onClick={() => this.closeChannelModal()}>Cancel</button></p>
-              </Modal>
               <div className="headingOne">
                 {this.state.activeChannel
                   ?
