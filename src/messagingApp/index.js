@@ -40,8 +40,8 @@ export default class MessagingApp extends React.Component{
        return messages.val()[key];
      });
      this.setState({all_messages: all_messages});
-     this.forceUpdate();
     });
+    this.forceUpdate();
   };
 
   getChannels = () => {
