@@ -62,7 +62,7 @@ export default class MessagingApp extends React.Component{
     this.scrollToBottom();
     this.getChannels();
     this.requestPermission();
-    getMessagesAndSetState();
+    this.getMessagesAndSetState();
     firebase.auth().getRedirectResult().then(function(result) {
         if (result.credential) {
           var token = result.credential.accessToken;
