@@ -186,7 +186,7 @@ export default class MessagingApp extends React.Component{
 
   componentDidUpdate() {
     this.scrollToBottom();
-    setInterval(this.getMessagesAndSetState, 3000);
+    //setInterval(this.getMessagesAndSetState, 3000);
   }
 
 
