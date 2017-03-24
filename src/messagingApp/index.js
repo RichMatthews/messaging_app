@@ -189,7 +189,7 @@ export default class MessagingApp extends React.Component{
   }
 
   componentWillUpdate() {
-    this.getMessagesAndSetState();
+    //this.getMessagesAndSetState();
   }
 
 
