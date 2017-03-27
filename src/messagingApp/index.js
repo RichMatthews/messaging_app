@@ -35,7 +35,6 @@ export default class MessagingApp extends React.Component{
   }
 
   getMessagesAndSetState = () => {
-    this.forceUpdate();
     this.pullMessagesFromDb('/options' + '/messages/' + this.state.channelValue + '/').then((messages) => {
       let all_messages = Object.keys(messages.val()).map(function(key) {
        return messages.val()[key];
@@ -87,6 +86,10 @@ export default class MessagingApp extends React.Component{
     .then(function() {
       console.log('Notification permission granted.');
       // TODO(developer): Retrieve an Instance ID token for use with FCM.
+      return messaging.getToken();
+    })
+    .then(function(token){
+      console.log(token, 'token11');
     })
     .catch(function(err) {
       console.log('Unable to get permission to notify.', err);
